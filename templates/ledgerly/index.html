@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; src: url("assets/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Inter"; src: url("assets/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Inter"; src: url("assets/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Fraunces"; src: url("assets/fraunces-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #f6f4ef; }
+      #root { width: 100%; height: 100%; position: relative; font-family: "Inter", sans-serif; color: #1b1d23; background: #f6f4ef; }
+      .grid { position: absolute; inset: 0; background-image: linear-gradient(#e7e3da 2px, transparent 2px), linear-gradient(90deg, #e7e3da 2px, transparent 2px); background-size: 120px 120px; opacity: 0.55; }
+      .scene { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 96px; }
+      .kicker { align-self: flex-start; font-size: 32px; font-weight: 600; color: #1f8a5b; background: #dff1e7; padding: 14px 28px; border-radius: 999px; margin-bottom: 48px; }
+      .h { font-weight: 600; font-size: 118px; line-height: 1.04; letter-spacing: -0.035em; }
+      .h em { font-family: "Fraunces", serif; font-style: italic; font-weight: 400; color: #1f8a5b; letter-spacing: -0.01em; }
+      .line { display: block; overflow: hidden; padding-bottom: 40px; margin-bottom: -30px; }
+      .line > span { display: block; }
+
+      .card { background: #ffffff; border: 3px solid #e2ddd2; border-radius: 40px; padding: 56px; box-shadow: 0 30px 80px rgba(27,29,35,0.08); }
+      .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+      .inv { font-size: 34px; color: #6b6f78; font-weight: 500; }
+      .tagwrap { position: relative; width: 300px; height: 64px; }
+      .tag { position: absolute; right: 0; top: 0; font-size: 30px; font-weight: 600; padding: 12px 26px; border-radius: 999px; white-space: nowrap; }
+      .tag.over { background: #fde4df; color: #b3321b; }
+      .tag.paid { background: #dff1e7; color: #1f8a5b; }
+      .client { font-size: 54px; font-weight: 600; letter-spacing: -0.02em; }
+      .amount { font-size: 112px; font-weight: 600; letter-spacing: -0.04em; margin-top: 20px; }
+      .bar { height: 3px; background: #ece8df; margin: 40px 0 32px; }
+      .meta { display: flex; justify-content: space-between; font-size: 32px; color: #6b6f78; }
+      .toast { align-self: center; margin-top: 64px; display: flex; align-items: center; gap: 22px; background: #1b1d23; color: #f6f4ef; font-size: 38px; font-weight: 500; padding: 26px 40px; border-radius: 999px; }
+      .toast i { width: 20px; height: 20px; border-radius: 50%; background: #48c98a; display: block; }
+
+      .feat { display: flex; align-items: flex-start; gap: 36px; margin-top: 56px; }
+      .num { flex: none; width: 88px; height: 88px; border-radius: 26px; background: #1f8a5b; color: #fff; font-size: 44px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+      .feat p { font-size: 58px; font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; padding-top: 8px; }
+
+      .logo { display: flex; align-items: center; gap: 28px; margin-bottom: 56px; }
+      .mark { width: 120px; height: 120px; border-radius: 34px; background: #1f8a5b; display: flex; align-items: center; justify-content: center; }
+      .mark svg { width: 66px; height: 66px; }
+      .wordmark { font-size: 80px; font-weight: 600; letter-spacing: -0.04em; }
+      .live { align-self: flex-start; margin-top: 64px; background: #1b1d23; color: #f6f4ef; font-size: 46px; font-weight: 600; padding: 30px 52px; border-radius: 999px; }
+      .foot { position: absolute; left: 96px; bottom: 130px; font-size: 30px; color: #6f727a; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="16" data-width="1080" data-height="1920">
+      <div class="grid" id="grid"></div>
+
+      <div class="scene clip" id="s1" data-start="0" data-duration="3.2" data-track-index="1">
+        <div class="kicker" id="s1k">New in Ledgerly</div>
+        <div class="h">
+          <span class="line"><span id="s1a">Late invoices,</span></span>
+          <span class="line"><span id="s1b">chased <em>for you.</em></span></span>
+        </div>
+      </div>
+
+      <div class="scene clip" id="s2" data-start="3.2" data-duration="5.6" data-track-index="1">
+        <div class="card" id="card">
+          <div class="card-top">
+            <div class="inv">Invoice #1042</div>
+            <div class="tagwrap"><div class="tag over" id="tagOver">Overdue 7 days</div><div class="tag paid" id="tagPaid">Paid</div></div>
+          </div>
+          <div class="client">Northwind Studio</div>
+          <div class="amount">$2,400.00</div>
+          <div class="bar"></div>
+          <div class="meta"><span>Due Sep 30</span><span>Net 15</span></div>
+        </div>
+        <div class="toast" id="toast1"><i></i>Friendly reminder sent</div>
+      </div>
+
+      <div class="scene clip" id="s3" data-start="8.8" data-duration="3.9" data-track-index="1">
+        <div class="h" style="font-size: 96px;">
+          <span class="line"><span id="s3h">How it works</span></span>
+        </div>
+        <div class="feat" id="f1"><div class="num">1</div><p>Polite reminders on your schedule</p></div>
+        <div class="feat" id="f2"><div class="num">2</div><p>Stops the moment they pay</p></div>
+        <div class="feat" id="f3"><div class="num">3</div><p>No awkward follow-ups</p></div>
+      </div>
+
+      <div class="scene clip" id="s4" data-start="12.7" data-duration="3.3" data-track-index="1">
+        <div class="logo" id="logo">
+          <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9l3 3v13H6z"/><path d="M9 12.5l2.2 2.2L15.5 10"/></svg></div>
+          <div class="wordmark">Ledgerly</div>
+        </div>
+        <div class="h" style="font-size: 104px;">
+          <span class="line"><span id="s4a">Auto-Chase is</span></span>
+          <span class="line"><span id="s4b"><em>live today.</em></span></span>
+        </div>
+        <div class="live" id="s4p">Turn it on in Settings</div>
+        <div class="foot" id="foot">Demo product · made by ShipClips</div>
+      </div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const E = "power3.out", OUT = "power2.in";
+      tl.fromTo("#grid", { y: 0 }, { y: -120, duration: 16, ease: "none" }, 0);
+
+      tl.fromTo("#s1k", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 0.15);
+      tl.fromTo(["#s1a", "#s1b"], { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: E, stagger: 0.18 }, 0.35);
+      tl.to(["#s1k", "#s1a", "#s1b"], { opacity: 0, y: -30, duration: 0.35, ease: OUT }, 2.8);
+
+      tl.fromTo("#card", { opacity: 0, y: 80, rotation: -2 }, { opacity: 1, y: 0, rotation: 0, duration: 0.7, ease: E }, 3.3);
+      tl.fromTo("#tagPaid", { opacity: 0, scale: 0.6 }, { opacity: 0, scale: 0.6, duration: 0.01 }, 3.3);
+      tl.fromTo("#toast1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" }, 4.6);
+      tl.to("#tagOver", { opacity: 0, scale: 0.8, duration: 0.3, ease: OUT }, 6.3);
+      tl.to("#tagPaid", { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2.2)" }, 6.45);
+      tl.to("#card", { borderColor: "#1f8a5b", duration: 0.4 }, 6.45);
+      tl.fromTo("#card", { scale: 1 }, { scale: 1.03, duration: 0.18, yoyo: true, repeat: 1, ease: "sine.inOut" }, 6.5);
+      tl.to("#toast1", { opacity: 0, y: 20, duration: 0.3, ease: OUT }, 6.4);
+      tl.to("#card", { opacity: 0, y: -40, duration: 0.35, ease: OUT }, 8.4);
+
+      tl.fromTo("#s3h", { yPercent: 110 }, { yPercent: 0, duration: 0.6, ease: E }, 8.85);
+      tl.fromTo(["#f1", "#f2", "#f3"], { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.5, ease: E, stagger: 0.35 }, 9.3);
+      tl.to(["#s3h", "#f1", "#f2", "#f3"], { opacity: 0, y: -30, duration: 0.3, ease: OUT }, 12.35);
+
+      tl.fromTo("#logo", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.55, ease: "back.out(1.8)" }, 12.75);
+      tl.fromTo(["#s4a", "#s4b"], { yPercent: 110 }, { yPercent: 0, duration: 0.6, ease: E, stagger: 0.15 }, 13.1);
+      tl.fromTo("#s4p", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 13.7);
+      tl.fromTo("#foot", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 14.0);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; src: url("assets/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Inter"; src: url("assets/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "JetBrains Mono"; src: url("assets/jetbrains-mono-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "JetBrains Mono"; src: url("assets/jetbrains-mono-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #0b0f14; }
+      #root { width: 100%; height: 100%; position: relative; font-family: "Inter", sans-serif; color: #e6edf3; background: #0b0f14; }
+      .glow { position: absolute; width: 1200px; height: 1200px; left: -60px; top: 360px; border-radius: 50%; background: radial-gradient(circle, rgba(126,231,135,0.13) 0%, rgba(126,231,135,0) 60%); }
+      .scene { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 80px; }
+      .mono { font-family: "JetBrains Mono", monospace; }
+      .kicker { font-family: "JetBrains Mono", monospace; font-size: 34px; color: #7ee787; margin-bottom: 44px; }
+      .h { font-weight: 600; font-size: 116px; line-height: 1.04; letter-spacing: -0.04em; }
+      .h .g { color: #7ee787; }
+      .line { display: block; overflow: hidden; padding-bottom: 26px; margin-bottom: -16px; }
+      .line > span { display: block; }
+
+      .term { background: #121821; border: 2px solid #263040; border-radius: 32px; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.5); }
+      .bar { display: flex; gap: 16px; padding: 28px 32px; border-bottom: 2px solid #263040; }
+      .bar i { width: 22px; height: 22px; border-radius: 50%; background: #3a4555; display: block; }
+      .body { padding: 44px 40px 52px; font-family: "JetBrains Mono", monospace; font-size: 36px; line-height: 1.55; min-height: 760px; }
+      .prompt { color: #e6edf3; }
+      .prompt .p { color: #7ee787; }
+      .cursor { display: inline-block; width: 20px; height: 40px; background: #7ee787; vertical-align: -6px; margin-left: 4px; opacity: 0; }
+      .out { margin-top: 36px; color: #9aa7b6; }
+      .out div { margin-top: 18px; }
+      .out b { color: #7ee787; font-weight: 500; }
+      .out .warn { color: #ffb86b; }
+      .out .strong { color: #e6edf3; }
+
+      .vs { display: flex; flex-direction: column; gap: 28px; margin-top: 64px; }
+      .row { display: flex; align-items: baseline; justify-content: space-between; border-top: 2px solid #263040; padding-top: 28px; }
+      .row span { font-size: 44px; color: #9aa7b6; font-weight: 500; }
+      .row b { font-size: 120px; font-weight: 600; letter-spacing: -0.04em; }
+      .row.old b { color: #6b7686; text-decoration: line-through; text-decoration-thickness: 8px; }
+      .row.new b { color: #7ee787; }
+
+      .install { align-self: flex-start; margin-top: 64px; font-family: "JetBrains Mono", monospace; font-size: 48px; color: #0b0f14; background: #7ee787; padding: 30px 48px; border-radius: 22px; }
+      .foot { position: absolute; left: 80px; bottom: 130px; font-family: "JetBrains Mono", monospace; font-size: 28px; color: #5b6676; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="16" data-width="1080" data-height="1920">
+      <div class="glow" id="glow"></div>
+
+      <div class="scene clip" id="s1" data-start="0" data-duration="3" data-track-index="1">
+        <div class="kicker" id="s1k">// querybird 1.0</div>
+        <div class="h">
+          <span class="line"><span id="s1a">Ask your logs</span></span>
+          <span class="line"><span id="s1b"><span class="g">in plain English.</span></span></span>
+        </div>
+      </div>
+
+      <div class="scene clip" id="s2" data-start="3" data-duration="6.4" data-track-index="1">
+        <div class="term" id="term">
+          <div class="bar"><i></i><i></i><i></i></div>
+          <div class="body">
+            <div class="prompt"><span class="p">$ </span><span id="typed">qb ask "why did checkout fail?"</span><span class="cursor" id="cur"></span></div>
+            <div class="out">
+              <div id="o1"><b>→</b> scanned 1.2M lines in 3.8s</div>
+              <div id="o2" class="warn">→ 312 errors · payment-service</div>
+              <div id="o3"><b>→</b> <span class="strong">cause:</span> API key expired at 01:58</div>
+              <div id="o4"><b>→</b> <span class="strong">fix:</span> rotate PAYMENTS_KEY in prod</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scene clip" id="s3" data-start="9.4" data-duration="3.4" data-track-index="1">
+        <div class="h" style="font-size: 100px;">
+          <span class="line"><span id="s3a">Debugging, without</span></span>
+          <span class="line"><span id="s3b">the <span class="g">grep.</span></span></span>
+        </div>
+        <div class="vs">
+          <div class="row old" id="v1"><span>Before</span><b>40 min</b></div>
+          <div class="row new" id="v2"><span>With Querybird</span><b>4 sec</b></div>
+        </div>
+      </div>
+
+      <div class="scene clip" id="s4" data-start="12.8" data-duration="3.2" data-track-index="1">
+        <div class="h">
+          <span class="line"><span id="s4a">Querybird 1.0</span></span>
+          <span class="line"><span id="s4b"><span class="g">is out.</span></span></span>
+        </div>
+        <div class="install" id="s4p">npx querybird</div>
+        <div class="foot" id="foot">demo product · made by shipclips</div>
+      </div>
+    </div>
+
+    <script>
+      // split the command into characters for a seekable typing effect
+      const typed = document.getElementById("typed");
+      const text = typed.textContent;
+      typed.textContent = "";
+      const chars = [];
+      for (const ch of text) {
+        const s = document.createElement("span");
+        s.textContent = ch;
+        s.style.opacity = "0";
+        typed.appendChild(s);
+        chars.push(s);
+      }
+
+      const tl = gsap.timeline({ paused: true });
+      const E = "power3.out", OUT = "power2.in";
+      tl.fromTo("#glow", { x: -40, y: 60 }, { x: 60, y: -100, duration: 16, ease: "sine.inOut" }, 0);
+
+      tl.fromTo("#s1k", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.45, ease: E }, 0.15);
+      tl.fromTo(["#s1a", "#s1b"], { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: E, stagger: 0.18 }, 0.3);
+      tl.to(["#s1k", "#s1a", "#s1b"], { opacity: 0, y: -30, duration: 0.35, ease: OUT }, 2.6);
+
+      tl.fromTo("#term", { opacity: 0, y: 80, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: E }, 3.05);
+      tl.fromTo(chars, { opacity: 0 }, { opacity: 1, duration: 0.01, stagger: 0.045 }, 3.7);
+      const typedEnd = 3.7 + chars.length * 0.045;
+      tl.fromTo("#cur", { opacity: 1 }, { opacity: 0, duration: 0.01, yoyo: true, repeat: 5, repeatDelay: 0.25, immediateRender: false }, typedEnd + 0.05);
+      tl.fromTo(["#o1", "#o2", "#o3", "#o4"], { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.3, ease: E, stagger: 0.42 }, typedEnd + 0.35);
+      tl.to("#term", { opacity: 0, y: -40, duration: 0.35, ease: OUT }, 9.0);
+
+      tl.fromTo(["#s3a", "#s3b"], { yPercent: 110 }, { yPercent: 0, duration: 0.6, ease: E, stagger: 0.15 }, 9.45);
+      tl.fromTo("#v1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 10.2);
+      tl.fromTo("#v2", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 10.75);
+      tl.to(["#s3a", "#s3b", "#v1", "#v2"], { opacity: 0, y: -30, duration: 0.3, ease: OUT }, 12.45);
+
+      tl.fromTo(["#s4a", "#s4b"], { yPercent: 110 }, { yPercent: 0, duration: 0.6, ease: E, stagger: 0.15 }, 12.85);
+      tl.fromTo("#s4p", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.8)" }, 13.5);
+      tl.fromTo("#foot", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 13.9);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
