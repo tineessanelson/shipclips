@@ -15,3 +15,6 @@ Spec: {"id", "theme": {bg, ink, accent, accentInk, card, cardInk, line, muted, b
 
 Screen time is set from word count (about 4 words a second) so every screen can be read.
 Use only the customer's own wording and real features. Customer specs and videos never go in this repo.
+
+Sound: videos are silent by default. Set "sound": true in the spec to add the placeholder effects in sfx/.
+Replace sfx/ with a properly licensed library before offering sound to customers.

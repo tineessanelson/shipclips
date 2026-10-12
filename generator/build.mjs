@@ -100,7 +100,8 @@ const html = beats.map((b) => {
   throw new Error('Unknown beat type ' + b.type);
 }).join('\n');
 
-const audio = sfx.filter(([, at]) => at >= 0 && at < total - 0.05).map(([f, at, v], k) => {
+// Sound is off unless the spec sets "sound": true (the synthesized effects are placeholders until a licensed library is added).
+const audio = !spec.sound ? '' : sfx.filter(([, at]) => at >= 0 && at < total - 0.05).map(([f, at, v], k) => {
   const len = { whoosh: 0.45, pop: 0.1, click: 0.03, ding: 0.9, thud: 0.35, rise: 0.9 }[f];
   const d = Math.min(len, +(total - at).toFixed(2));
   return `<audio id="sfx${k}" src="sfx/${f}.wav" data-start="${at.toFixed(2)}" data-duration="${d}" data-track-index="${10 + (k % 4)}" data-volume="${v}"></audio>`;
