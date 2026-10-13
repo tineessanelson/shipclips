@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How a ShipClips video is made · Case study</title>
+<meta name="description" content="A step-by-step look at how ShipClips turns a three-question brief into a 15-second vertical launch video.">
+<meta property="og:title" content="How a ShipClips launch video is made">
+<meta property="og:description" content="From a three-question brief to a finished 15-second vertical video, screen by screen.">
+<meta property="og:image" content="https://shipclips.io/assets/og.png">
+<meta property="og:url" content="https://shipclips.io/case-study/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+  :root { --ink:#121212; --paper:#fbfaf7; --soft:#45423c; --muted:#5d5951; --line:#e2ddd2; --accent:#ff4d1c; --accent-ink:#c2330c; --tint:#ffe6dc; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Instrument Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: var(--ink); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+  header { padding: 24px 0; }
+  header .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 22px; letter-spacing: -0.03em; }
+  .btn { display: inline-flex; align-items: center; min-height: 48px; padding: 14px 24px; border-radius: 999px; font-weight: 600; font-size: 17px; text-decoration: none; }
+  .btn-accent { background: var(--accent); color: var(--ink); } .btn-accent:hover { background: #ff6a3f; }
+  .btn-dark { background: var(--ink); color: var(--paper); } .btn-dark:hover { background: #2a2a2a; }
+  .eyebrow { display: inline-block; font-size: 14px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-ink); background: var(--tint); padding: 8px 14px; border-radius: 999px; }
+  h1, h2 { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; letter-spacing: -0.045em; margin: 0; }
+  h1 { font-size: clamp(40px, 6vw, 72px); line-height: 1; margin-top: 22px; }
+  h2 { font-size: clamp(30px, 4vw, 44px); line-height: 1.05; }
+  .lede { font-size: 20px; line-height: 1.55; color: var(--soft); max-width: 640px; margin: 22px 0 0; }
+  section { padding: 64px 0; border-top: 2px solid var(--line); }
+  .hero { padding: 40px 0 72px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center; }
+  .hero .copy { flex: 1 1 420px; min-width: 0; }
+  .hero video { flex: 0 1 300px; width: 300px; max-width: 100%; aspect-ratio: 9 / 16; border-radius: 22px; border: 3px solid var(--ink); margin: 0 auto; display: block; background: #eee; }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 30px; }
+  .fact { background: #fff; border: 2px solid var(--line); border-radius: 18px; padding: 18px; }
+  .fact b { display: block; font-family: "Bricolage Grotesque", sans-serif; font-size: 30px; letter-spacing: -0.03em; }
+  .fact span { font-size: 15px; color: var(--muted); }
+  .step { font-size: 14px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 10px; }
+  .brief { margin-top: 26px; background: #fff; border: 2px solid var(--ink); border-radius: 20px; overflow: hidden; }
+  .brief div { display: flex; flex-wrap: wrap; gap: 8px 24px; padding: 18px 22px; border-top: 2px solid var(--line); font-size: 18px; }
+  .brief div:first-child { border-top: 0; }
+  .brief dt { font-weight: 600; flex: 0 0 300px; max-width: 100%; }
+  .brief dd { margin: 0; color: var(--soft); flex: 1 1 260px; }
+  p.body { font-size: 18px; line-height: 1.6; color: var(--soft); max-width: 680px; margin: 16px 0 0; }
+  .beats { margin-top: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 18px; }
+  .beat img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 16px; border: 2px solid var(--line); display: block; }
+  .beat strong { display: block; margin-top: 10px; font-size: 16px; }
+  .beat span { display: block; margin-top: 3px; font-size: 14px; color: var(--muted); line-height: 1.4; }
+  ul.rules { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 14px; max-width: 720px; }
+  ul.rules li { font-size: 18px; line-height: 1.5; color: var(--soft); padding-left: 30px; position: relative; }
+  ul.rules li::before { content: ""; position: absolute; left: 0; top: 8px; width: 14px; height: 14px; border-radius: 4px; background: var(--accent); }
+  ul.rules b { color: var(--ink); }
+  .cta { background: var(--ink); color: var(--paper); border-radius: 28px; padding: clamp(28px, 5vw, 56px); margin: 64px 0; display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; }
+  .cta h2 { color: var(--paper); }
+  .cta p { color: #c9c5bc; font-size: 18px; margin: 10px 0 0; }
+  footer { border-top: 2px solid var(--line); }
+  footer .wrap { padding: 28px 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 15px; color: var(--muted); }
+  :focus-visible { outline: 3px solid var(--accent-ink); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="/"><img src="/assets/favicon.svg" alt="" width="34" height="34">ShipClips</a>
+  <a class="btn btn-dark" href="https://buy.stripe.com/cNieVd4TzciOfT6h1KcIE00" style="font-size:16px; padding:12px 20px">Order a video</a>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="copy">
+      <span class="eyebrow">Case study</span>
+      <h1>How a ShipClips video is made</h1>
+      <p class="lede">The fairest way to show the process is to run it on ourselves. Here is the exact brief, script and finished video for the ShipClips launch video, step by step.</p>
+      <div class="facts">
+        <div class="fact"><b>3</b><span>questions in the brief</span></div>
+        <div class="fact"><b>5</b><span>screens in the script</span></div>
+        <div class="fact"><b>16 sec</b><span>finished vertical video</span></div>
+      </div>
+    </div>
+    <video src="shipclips-launch-video.mp4" poster="frame-0.jpg" autoplay muted loop playsinline controls aria-label="The finished ShipClips launch video"></video>
+  </div>
+
+  <section>
+    <div class="step">Step 1 · The brief</div>
+    <h2>Three answers at checkout</h2>
+    <p class="body">Every order starts with the same three questions on the Stripe checkout page. These were the answers for this video.</p>
+    <dl class="brief">
+      <div><dt>Which style would you like?</dt><dd>Light</dd></div>
+      <div><dt>Your product's website</dt><dd>shipclips.io</dd></div>
+      <div><dt>What are you launching, and what's the key point?</dt><dd>A done-for-you launch video service for founders. The key point is that it is ready in 48 hours, with no editing on their side.</dd></div>
+    </dl>
+  </section>
+
+  <section>
+    <div class="step">Step 2 · The script</div>
+    <h2>Five screens, each one readable</h2>
+    <p class="body">We read the website, pull the founder's own wording, and write one idea per screen. Each screen stays up long enough to read at a normal pace, about four words a second, so nobody has to pause the video to catch it.</p>
+    <div class="beats">
+      <div class="beat"><img src="frame-0.jpg" alt="Screen 1: You shipped it. Now show it."><strong>1 · The hook</strong><span>Who it is for and the promise, in six words.</span></div>
+      <div class="beat"><img src="frame-1.jpg" alt="Screen 2: a card listing what is included"><strong>2 · What you get</strong><span>Three concrete features, ticked off one by one.</span></div>
+      <div class="beat"><img src="frame-2.jpg" alt="Screen 3: How it works in three steps"><strong>3 · How it works</strong><span>The whole process in three short steps.</span></div>
+      <div class="beat"><img src="frame-3.jpg" alt="Screen 4: No editing. No waiting weeks."><strong>4 · The difference</strong><span>Why this instead of the usual way.</span></div>
+      <div class="beat"><img src="frame-4.jpg" alt="Screen 5: ShipClips, Order your video"><strong>5 · The call to action</strong><span>Name, one clear next step, and the web address.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="step">Step 3 · The edit</div>
+    <h2>Built to hold attention on a muted feed</h2>
+    <ul class="rules">
+      <li><b>Fast cuts.</b> A new screen every two to four seconds, with quick slide-in transitions.</li>
+      <li><b>Words that land one at a time.</b> Headlines pop in word by word, so the eye follows the sentence.</li>
+      <li><b>A progress bar.</b> A thin bar across the top shows how much is left, which keeps people watching to the end.</li>
+      <li><b>No sound needed.</b> Most people scroll X and LinkedIn with the sound off, so every video tells its story in text and motion.</li>
+      <li><b>Your brand colors.</b> We match the colors on your website, and you can ask for exact ones.</li>
+      <li><b>Only your claims.</b> We use your own wording and real features. We never add numbers or promises you did not make.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="step">Step 4 · Delivery</div>
+    <h2>Checked, then sent to you</h2>
+    <p class="body">Before anything is sent, a person checks every screen of the finished video for spelling, accuracy and anything cut off. You receive a 1080 × 1920 MP4 by email within 48 hours, and two rounds of changes are included. The video is yours to post anywhere.</p>
+  </section>
+
+  <div class="cta">
+    <div>
+      <h2>Would you like one for your launch?</h2>
+      <p>$199 for the first 10 orders, delivered within 48 hours.</p>
+    </div>
+    <a class="btn btn-accent" href="https://buy.stripe.com/cNieVd4TzciOfT6h1KcIE00">Order a video</a>
+  </div>
+</main>
+
+<footer><div class="wrap">
+  <span>© 2026 ShipClips · Made by Tineessa Nelson</span>
+  <a href="/" style="color:#45423c">shipclips.io</a>
+</div></footer>
+</body>
+</html>
